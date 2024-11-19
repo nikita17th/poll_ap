@@ -51,13 +51,19 @@ export default {
   },
   methods: {
     copyToClipboard(url) {
-      navigator.clipboard.writeText(url)
-          .then(() => {
-            alert('URL copied!');
-          })
-          .catch(err => {
-            console.error('Error copy URL:', err);
-          });
+      const tempInput = document.createElement('input');
+      document.body.appendChild(tempInput);
+      tempInput.value = url;
+      tempInput.select();
+
+      try {
+        document.execCommand('copy');
+        alert('URL copied!');
+      } catch (err) {
+        console.error('Error copying URL:', err);
+      }
+
+      document.body.removeChild(tempInput);
     },
     openInNewTab(url) {
       window.open(url, '_blank');
