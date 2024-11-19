@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     emitUpdate() {
-      console.log("Text updated:", this.localText);
       this.$emit('update-question', { text: this.localText });
     }
   },
